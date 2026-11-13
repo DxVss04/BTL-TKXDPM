@@ -1,0 +1,102 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Cài thư viện backend",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Tạo dữ liệu mẫu (seed)",
+      "type": "shell",
+      "command": "npm run seed",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "3. Chạy backend",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "4. Cài thư viện app",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/mobile"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "5. Chạy app (Expo)",
+      "type": "shell",
+      "command": "npx expo start",
+      "options": {
+        "cwd": "${workspaceFolder}/mobile"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Cài đặt tất cả",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "1. Cài thư viện backend",
+        "4. Cài thư viện app"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Chạy tất cả (backend + app)",
+      "dependsOn": [
+        "3. Chạy backend",
+        "5. Chạy app (Expo)"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "MongoDB bằng Docker",
+      "type": "shell",
+      "command": "docker compose up -d",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "6. Build bản web",
+      "type": "shell",
+      "command": "npm run build:web",
+      "options": {
+        "cwd": "${workspaceFolder}/mobile"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Chạy bản web (build + backend)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "6. Build bản web",
+        "3. Chạy backend"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

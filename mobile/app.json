@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Đi chợ tiện lợi",
+    "slug": "di-cho-tien-loi",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "android": {
+      "package": "vn.hust.it4788.dicho",
+      "permissions": [
+        "NOTIFICATIONS"
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "vn.hust.it4788.dicho",
+      "supportsTablet": false
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#2E9E5B"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Ứng dụng cần truy cập ảnh để chọn ảnh thực phẩm / ảnh đại diện."
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ]
+  }
+}

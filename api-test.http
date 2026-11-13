@@ -1,0 +1,83 @@
+### File test nhanh API bằng extension "REST Client" trong VS Code (bấm "Send Request" phía trên mỗi request)
+@base = http://localhost:3000/it4788
+# Sau khi login, copy accessToken dán vào đây:
+@token = DAN_ACCESS_TOKEN_VAO_DAY
+
+### Đăng nhập (tài khoản mẫu sau khi chạy seed)
+POST {{base}}/user/login
+Content-Type: application/json
+
+{ "email": "me@dicho.vn", "password": "123456" }
+
+### Đăng ký
+POST {{base}}/user
+Content-Type: application/x-www-form-urlencoded
+
+email=test@gmail.com&password=123456&name=Nguoi Test&language=vn&timezone=Asia/Ho_Chi_Minh&deviceId=abc
+
+### Lấy thông tin user
+GET {{base}}/user
+Authorization: Bearer {{token}}
+
+### Lấy thành viên nhóm
+GET {{base}}/user/group
+Authorization: Bearer {{token}}
+
+### Danh sách thực phẩm của nhóm
+GET {{base}}/food
+Authorization: Bearer {{token}}
+
+### Tạo thực phẩm
+POST {{base}}/food
+Authorization: Bearer {{token}}
+Content-Type: application/x-www-form-urlencoded
+
+name=Cà rốt&foodCategoryName=Rau củ&unitName=kg
+
+### Thêm vào tủ lạnh
+POST {{base}}/fridge
+Authorization: Bearer {{token}}
+Content-Type: application/x-www-form-urlencoded
+
+foodName=Cà rốt&useWithin=5&quantity=1&note=Mua ở chợ
+
+### Đồ trong tủ lạnh
+GET {{base}}/fridge
+Authorization: Bearer {{token}}
+
+### Tạo danh sách mua sắm, giao cho bohung
+POST {{base}}/shopping
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Đi chợ cuối tuần", "assignToUsername": "bohung", "note": "", "date": "2026-12-01" }
+
+### Thêm nhiệm vụ (thay listId)
+POST {{base}}/shopping/task
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "listId": "THAY_LIST_ID", "tasks": [ { "foodName": "Thịt bò", "quantity": "1" }, { "foodName": "Rau muống", "quantity": "2" } ] }
+
+### Lấy các danh sách + nhiệm vụ
+GET {{base}}/shopping/task
+Authorization: Bearer {{token}}
+
+### Thêm kế hoạch bữa ăn
+POST {{base}}/meal
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "foodName": "Trứng gà", "timestamp": "2026-12-01T12:00:00+07:00", "name": "trưa" }
+
+### Kế hoạch theo ngày
+GET {{base}}/meal?date=2026-12-01
+Authorization: Bearer {{token}}
+
+### Gợi ý món từ tủ lạnh
+GET {{base}}/recipe/suggest
+Authorization: Bearer {{token}}
+
+### Thống kê
+GET {{base}}/stats?from=2026-11-01&to=2026-12-31
+Authorization: Bearer {{token}}
